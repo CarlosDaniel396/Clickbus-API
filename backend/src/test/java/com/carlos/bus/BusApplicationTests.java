@@ -1,4 +1,4 @@
-package com.calors.bus;
+package com.carlos.bus;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
