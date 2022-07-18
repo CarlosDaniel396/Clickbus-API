@@ -5,6 +5,8 @@ import static org.mockito.ArgumentMatchers.any;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -48,11 +50,16 @@ public class PlaceServiceTests {
 		page = new PageImpl<>(List.of(place));
 
 		Mockito.when(repository.findAll((Pageable) any())).thenReturn(page);
-
+		
+		Mockito.when(repository.find(any(), any())).thenReturn(page);
+	
 		Mockito.when(repository.findById(existingId)).thenReturn(Optional.of(place));
 		Mockito.when(repository.findById(nonExistingId)).thenReturn(Optional.empty());
+		
+		Mockito.when(repository.getReferenceById(existingId)).thenReturn(place);
+		Mockito.when(repository.getReferenceById(nonExistingId)).thenThrow(EntityNotFoundException.class);
 
-		Mockito.when(repository.find(any(), any())).thenReturn(page);
+		Mockito.when(repository.save(any())).thenReturn(place);
 	}
 
 	@Test
@@ -78,6 +85,22 @@ public class PlaceServiceTests {
 
 		Assertions.assertThrows(ResourceNotFoundException.class, () -> {
 			service.findById(nonExistingId);
+		});
+	}
+	
+	@Test
+	public void updateShouldReturnPlaceDTOWhenIdExists() {
+
+		PlaceDTO result = service.update(existingId, placeDTO);
+
+		Assertions.assertNotNull(result);
+	}
+	
+	@Test
+	public void updateShouldThrowResourceNotFoundExceptionWhenIdDoesNotExist() {
+
+		Assertions.assertThrows(ResourceNotFoundException.class, () -> {
+			service.update(nonExistingId, placeDTO);
 		});
 	}
 }

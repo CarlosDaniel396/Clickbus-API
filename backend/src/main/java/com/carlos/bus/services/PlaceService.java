@@ -2,6 +2,8 @@ package com.carlos.bus.services;
 
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,6 +40,18 @@ public class PlaceService {
 		copyDtoToEntity(dto, entity);
 		entity = repository.save(entity);
 		return new PlaceDTO(entity);
+	}
+
+	@Transactional
+	public PlaceDTO update(Long id, PlaceDTO dto) {
+		try {
+			Place entity = repository.getReferenceById(id);
+			copyDtoToEntity(dto, entity);
+			entity = repository.save(entity);
+			return new PlaceDTO(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException("Id not found " + id);
+		}
 	}
 
 	private void copyDtoToEntity(PlaceDTO dto, Place entity) {
