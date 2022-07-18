@@ -24,11 +24,26 @@ public class PlaceService {
 		Page<Place> list = repository.find(name, pageable);
 		return list.map(x -> new PlaceDTO(x));
 	}
-		
+
 	@Transactional(readOnly = true)
 	public PlaceDTO findById(Long id) {
 		Optional<Place> obj = repository.findById(id);
 		Place entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
 		return new PlaceDTO(entity);
+	}
+
+	@Transactional
+	public PlaceDTO insert(PlaceDTO dto) {
+		Place entity = new Place();
+		copyDtoToEntity(dto, entity);
+		entity = repository.save(entity);
+		return new PlaceDTO(entity);
+	}
+
+	private void copyDtoToEntity(PlaceDTO dto, Place entity) {
+
+		entity.setName(dto.getName());
+		entity.setCity(dto.getCity());
+		entity.setState(dto.getState());
 	}
 }
