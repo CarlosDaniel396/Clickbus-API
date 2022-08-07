@@ -6,6 +6,12 @@ Sistema baseado em um desafio da ClickBus. Ele consiste em um CRUD, onde é poss
 * Buscar por um lugar específico
 * Listar todos os lugares e poder filtrar por nome
 
+# Modelo conceitual
+
+<div align="center">
+<img src="https://github.com/CarlosDaniel396/book-api/blob/main/assets/library-uml.png"/>
+</div>
+
 # Tecnologias utilizadas
 * Java
 * Spring Boot
