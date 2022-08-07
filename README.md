@@ -9,7 +9,7 @@ Sistema baseado em um desafio da ClickBus. Ele consiste em um CRUD, onde é poss
 # Modelo conceitual
 
 <div align="center">
-<img src="https://github.com/CarlosDaniel396/book-api/blob/main/assets/library-uml.png"/>
+<img src="https://github.com/CarlosDaniel396/clickbus-api/blob/main/assets/place.png"/>
 </div>
 
 # Tecnologias utilizadas
