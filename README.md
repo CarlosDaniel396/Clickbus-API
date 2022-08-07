@@ -16,3 +16,22 @@ Sistema baseado em um desafio da ClickBus. Ele consiste em um CRUD, onde é poss
 
 # Implantação em produção
 * Back end: Heroku
+
+# Como rodar o projeto
+
+```
+# Clonar repositório
+git clone https://github.com/CarlosDaniel396/clickbus-api.git
+
+# Entrar na pasta backend
+cd backend
+
+# executar o projeto
+./mvnw spring-boot:run
+
+```
+# Autor
+Carlos Daniel Oliveira Nunes
+
+www.linkedin.com/in/carlos-daniel27
+
